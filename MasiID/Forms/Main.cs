@@ -11,10 +11,11 @@ using Microsoft.VisualBasic;
 using MasiID.Domains;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 using System.Xml.Linq;
+using MaterialSkin.Controls;
 
 namespace MasiID
 {
-    public partial class Main : Form
+    public partial class Main : MaterialForm
     {
         public Main()
         {
@@ -85,7 +86,7 @@ namespace MasiID
             };
 
             string error = user.IsValidUser();
-            if (!string.IsNullOrEmpty(error)) 
+            if (!string.IsNullOrEmpty(error))
             {
                 ErrorLabel.Text = error;
                 return;
