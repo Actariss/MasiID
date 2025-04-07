@@ -29,53 +29,73 @@ namespace MasiID
         Primary.Red500, Accent.Blue200, TextShade.WHITE);
         }
 
-        private void get_Data_From_Card(object sender, EventArgs e)
+        private async void get_Data_From_Card(object sender, EventArgs e)
         {
-            using (Readers readers = new(ReaderScope.User))
+            ErrorLabel.Text = "Lecture de la carte en cours...";
+
+            await Task.Run(() =>
             {
-                try
+                using (Readers readers = new(ReaderScope.User))
                 {
-                    EidCard eid = (EidCard)readers.ListCards().FirstOrDefault(c => c is EidCard);
-
-                    if (eid == null)
+                    try
                     {
-                        ErrorLabel.Text = "Aucune carte eID détectée.";
-                        birthBox.Text = string.Empty;
-                        NameBox.Text = string.Empty;
-                        SurnameBox.Text = string.Empty;
-                        SexBox.Text = string.Empty;
-                        CardNbrBox.Text = string.Empty;
-                        return;
-                    }
+                        EidCard eid = (EidCard)readers.ListCards().FirstOrDefault(c => c is EidCard);
 
-                    using (eid)
+                        if (eid == null)
+                        {
+                            this.Invoke((System.Windows.Forms.MethodInvoker)(() =>
+                            {
+                                ErrorLabel.Text = "Aucune carte eID détectée.";
+                                birthBox.Text = string.Empty;
+                                NameBox.Text = string.Empty;
+                                SurnameBox.Text = string.Empty;
+                                SexBox.Text = string.Empty;
+                                CardNbrBox.Text = string.Empty;
+                            }));
+                            return;
+                        }
+
+                        using (eid)
+                        {
+                            eid.Open();
+
+                            X509Certificate2 auth = eid.AuthCert;
+                            Egelke.Eid.Client.Model.Identity identity = eid.Identity;
+
+                            this.Invoke((System.Windows.Forms.MethodInvoker)(() =>
+                            {
+                                birthBox.Text = identity.DateOfBirth.ToShortDateString();
+                                NameBox.Text = identity.FirstNames.Split(" ")[0];
+                                SurnameBox.Text = identity.Surname;
+                                SexBox.Text = identity.Gender.ToString();
+                                CardNbrBox.Text = identity.CardNr;
+                                ErrorLabel.Text = "";
+                            }));
+                        }
+                    }
+                    catch (NoCardException)
                     {
-                        eid.Open();
-
-                        X509Certificate2 auth = eid.AuthCert;
-                        Egelke.Eid.Client.Model.Identity identity = eid.Identity;
-
-                        birthBox.Text = identity.DateOfBirth.ToShortDateString();
-                        NameBox.Text = identity.FirstNames.Split(" ")[0];
-                        SurnameBox.Text = identity.Surname;
-                        SexBox.Text = identity.Gender.ToString();
-                        CardNbrBox.Text = identity.CardNr;
-                        ErrorLabel.Text = "";
+                        this.Invoke((System.Windows.Forms.MethodInvoker)(() =>
+                        {
+                            ErrorLabel.Text = "No card detected in the reader";
+                        }));
+                    }
+                    catch (ReaderException)
+                    {
+                        this.Invoke((System.Windows.Forms.MethodInvoker)(() =>
+                        {
+                            ErrorLabel.Text = "The reader is not detected";
+                        }));
+                    }
+                    catch (Exception ex)
+                    {
+                        this.Invoke((System.Windows.Forms.MethodInvoker)(() =>
+                        {
+                            ErrorLabel.Text = $"Erreur : {ex.Message}";
+                        }));
                     }
                 }
-                catch (NoCardException)
-                {
-                    ErrorLabel.Text = "No card detected in the reader";
-                }
-                catch (ReaderException)
-                {
-                    ErrorLabel.Text = "The reader is not detected";
-                }
-                catch (Exception ex)
-                {
-                    ErrorLabel.Text = $"Erreur : {ex.Message}";
-                }
-            }
+            });
         }
 
         private async void Send_Click(object sender, EventArgs e)
@@ -98,7 +118,7 @@ namespace MasiID
                 ErrorLabel.Text = error;
                 return;
             }
-
+            await Task.Run(() => Network.SendDataToApiAsync(user));
             await Network.SendDataToApiAsync(user);
         }
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
