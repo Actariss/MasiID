@@ -12,6 +12,7 @@ using MasiID.Domains;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 using System.Xml.Linq;
 using MaterialSkin.Controls;
+using MaterialSkin;
 
 namespace MasiID
 {
@@ -20,6 +21,12 @@ namespace MasiID
         public Main()
         {
             InitializeComponent();
+
+            MaterialSkin.MaterialSkinManager materialSkinManager = MaterialSkin.MaterialSkinManager.Instance;
+            materialSkinManager.AddFormToManage(this);
+            materialSkinManager.Theme = MaterialSkin.MaterialSkinManager.Themes.LIGHT;
+            materialSkinManager.ColorScheme = new ColorScheme(Primary.Red700, Primary.Red800,
+        Primary.Red500, Accent.Blue200, TextShade.WHITE);
         }
 
         private void get_Data_From_Card(object sender, EventArgs e)
