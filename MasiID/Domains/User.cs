@@ -20,6 +20,14 @@ namespace MasiID.Domains
         public required string Surname { get; set; }
         public required string PinCodeConfirm { get; set; }
 
+        public required string StreetAndNumber { get; set; }
+        public required string Zip { get; set; }
+        public required string Municipality { get; set; }
+
+
+        // public required byte[] Picture { get; set; }
+
+
         public static bool IsValidEmail(string email) {
             return Regex.IsMatch(email, @"^[^@\s]+@[^@\s]+\.[^@\s]+$");
         }

@@ -13,6 +13,9 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 using System.Xml.Linq;
 using MaterialSkin.Controls;
 using MaterialSkin;
+using Egelke.Eid.Client.Model;
+using static System.Runtime.InteropServices.JavaScript.JSType;
+using System.Net;
 
 namespace MasiID
 {
@@ -46,11 +49,16 @@ namespace MasiID
                             this.Invoke((System.Windows.Forms.MethodInvoker)(() =>
                             {
                                 ErrorLabel.Text = "Aucune carte eID détectée.";
-                                birthBox.Text = string.Empty;
+                                BirthDateBox.Text = string.Empty;
                                 NameBox.Text = string.Empty;
                                 SurnameBox.Text = string.Empty;
                                 SexBox.Text = string.Empty;
                                 CardNbrBox.Text = string.Empty;
+                                StreetAndNumberBox.Text = string.Empty;
+                                MunicipalityBox.Text = string.Empty;
+                                ZipBox.Text = string.Empty;
+                                pictureBox.Image = null;
+
                             }));
                             return;
                         }
@@ -60,15 +68,23 @@ namespace MasiID
                             eid.Open();
 
                             X509Certificate2 auth = eid.AuthCert;
-                            Egelke.Eid.Client.Model.Identity identity = eid.Identity;
+
+                            Identity identity = eid.Identity;
+                            Address address = eid.Address;
+                            byte[] picture = eid.Picture;
+
 
                             this.Invoke((System.Windows.Forms.MethodInvoker)(() =>
                             {
-                                birthBox.Text = identity.DateOfBirth.ToShortDateString();
+                                BirthDateBox.Text = identity.DateOfBirth.ToShortDateString();
                                 NameBox.Text = identity.FirstNames.Split(" ")[0];
                                 SurnameBox.Text = identity.Surname;
                                 SexBox.Text = identity.Gender.ToString();
                                 CardNbrBox.Text = identity.CardNr;
+                                StreetAndNumberBox.Text = address.StreetAndNumber;
+                                MunicipalityBox.Text = address.Municipality;
+                                ZipBox.Text = address.Zip;
+                                pictureBox.Image = PictureHelper.GetImage(picture);
                                 ErrorLabel.Text = "";
                             }));
                         }
@@ -103,13 +119,17 @@ namespace MasiID
             User user = new()
             {
                 Sexe = SexBox.Text,
-                BirthDate = birthBox.Text,
+                BirthDate = BirthDateBox.Text,
                 NumCard = CardNbrBox.Text,
                 PinCode = PinBox.Text,
                 PinCodeConfirm = PinConfirmBox.Text,
                 Email = EmailBox.Text,
                 Name = NameBox.Text,
-                Surname = SurnameBox.Text
+                Surname = SurnameBox.Text,
+
+                StreetAndNumber = StreetAndNumberBox.Text,
+                Municipality = MunicipalityBox.Text,
+                Zip = ZipBox.Text
             };
 
             string error = user.IsValidUser();

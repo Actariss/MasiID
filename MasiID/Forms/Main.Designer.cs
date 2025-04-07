@@ -33,7 +33,7 @@ namespace MasiID
         private void InitializeComponent()
         {
             GetDataFromCardButton = new MaterialButton();
-            birthBox = new MaterialTextBox2();
+            BirthDateBox = new MaterialTextBox2();
             NameBox = new MaterialTextBox2();
             ErrorLabel = new MaterialLabel();
             EmailBox = new MaterialTextBox2();
@@ -43,6 +43,11 @@ namespace MasiID
             SurnameBox = new MaterialTextBox2();
             SendDataButton = new MaterialButton();
             PinConfirmBox = new MaterialTextBox2();
+            MunicipalityBox = new MaterialTextBox2();
+            StreetAndNumberBox = new MaterialTextBox2();
+            ZipBox = new MaterialTextBox2();
+            pictureBox = new PictureBox();
+            ((System.ComponentModel.ISupportInitialize)pictureBox).BeginInit();
             SuspendLayout();
             // 
             // GetDataFromCardButton
@@ -53,7 +58,7 @@ namespace MasiID
             GetDataFromCardButton.Depth = 0;
             GetDataFromCardButton.HighEmphasis = true;
             GetDataFromCardButton.Icon = null;
-            GetDataFromCardButton.Location = new Point(332, 442);
+            GetDataFromCardButton.Location = new Point(134, 544);
             GetDataFromCardButton.Margin = new Padding(4, 5, 4, 5);
             GetDataFromCardButton.MouseState = MaterialSkin.MouseState.HOVER;
             GetDataFromCardButton.Name = "GetDataFromCardButton";
@@ -65,34 +70,34 @@ namespace MasiID
             GetDataFromCardButton.UseAccentColor = false;
             GetDataFromCardButton.Click += get_Data_From_Card;
             // 
-            // birthBox
+            // BirthDateBox
             // 
-            birthBox.AnimateReadOnly = false;
-            birthBox.BackgroundImageLayout = ImageLayout.None;
-            birthBox.CharacterCasing = CharacterCasing.Normal;
-            birthBox.Depth = 0;
-            birthBox.Font = new Font("Microsoft Sans Serif", 16F, FontStyle.Regular, GraphicsUnit.Pixel);
-            birthBox.HideSelection = true;
-            birthBox.Hint = "Birth Date";
-            birthBox.LeadingIcon = null;
-            birthBox.Location = new Point(403, 118);
-            birthBox.MaxLength = 32767;
-            birthBox.MouseState = MaterialSkin.MouseState.OUT;
-            birthBox.Name = "birthBox";
-            birthBox.PasswordChar = '\0';
-            birthBox.PrefixSuffixText = null;
-            birthBox.ReadOnly = true;
-            birthBox.RightToLeft = RightToLeft.No;
-            birthBox.SelectedText = "";
-            birthBox.SelectionLength = 0;
-            birthBox.SelectionStart = 0;
-            birthBox.ShortcutsEnabled = true;
-            birthBox.Size = new Size(200, 48);
-            birthBox.TabIndex = 3;
-            birthBox.TabStop = false;
-            birthBox.TextAlign = HorizontalAlignment.Left;
-            birthBox.TrailingIcon = null;
-            birthBox.UseSystemPasswordChar = false;
+            BirthDateBox.AnimateReadOnly = false;
+            BirthDateBox.BackgroundImageLayout = ImageLayout.None;
+            BirthDateBox.CharacterCasing = CharacterCasing.Normal;
+            BirthDateBox.Depth = 0;
+            BirthDateBox.Font = new Font("Microsoft Sans Serif", 16F, FontStyle.Regular, GraphicsUnit.Pixel);
+            BirthDateBox.HideSelection = true;
+            BirthDateBox.Hint = "Birth Date";
+            BirthDateBox.LeadingIcon = null;
+            BirthDateBox.Location = new Point(295, 296);
+            BirthDateBox.MaxLength = 32767;
+            BirthDateBox.MouseState = MaterialSkin.MouseState.OUT;
+            BirthDateBox.Name = "BirthDateBox";
+            BirthDateBox.PasswordChar = '\0';
+            BirthDateBox.PrefixSuffixText = null;
+            BirthDateBox.ReadOnly = true;
+            BirthDateBox.RightToLeft = RightToLeft.No;
+            BirthDateBox.SelectedText = "";
+            BirthDateBox.SelectionLength = 0;
+            BirthDateBox.SelectionStart = 0;
+            BirthDateBox.ShortcutsEnabled = true;
+            BirthDateBox.Size = new Size(200, 48);
+            BirthDateBox.TabIndex = 3;
+            BirthDateBox.TabStop = false;
+            BirthDateBox.TextAlign = HorizontalAlignment.Left;
+            BirthDateBox.TrailingIcon = null;
+            BirthDateBox.UseSystemPasswordChar = false;
             // 
             // NameBox
             // 
@@ -104,7 +109,7 @@ namespace MasiID
             NameBox.HideSelection = true;
             NameBox.Hint = "Name";
             NameBox.LeadingIcon = null;
-            NameBox.Location = new Point(197, 172);
+            NameBox.Location = new Point(69, 188);
             NameBox.MaxLength = 32767;
             NameBox.MouseState = MaterialSkin.MouseState.OUT;
             NameBox.Name = "NameBox";
@@ -127,10 +132,10 @@ namespace MasiID
             // 
             ErrorLabel.Depth = 0;
             ErrorLabel.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            ErrorLabel.Location = new Point(197, 400);
+            ErrorLabel.Location = new Point(69, 484);
             ErrorLabel.MouseState = MaterialSkin.MouseState.HOVER;
             ErrorLabel.Name = "ErrorLabel";
-            ErrorLabel.Size = new Size(406, 37);
+            ErrorLabel.Size = new Size(426, 37);
             ErrorLabel.TabIndex = 6;
             ErrorLabel.TextAlign = ContentAlignment.MiddleCenter;
             // 
@@ -144,7 +149,7 @@ namespace MasiID
             EmailBox.HideSelection = true;
             EmailBox.Hint = "Enter email";
             EmailBox.LeadingIcon = null;
-            EmailBox.Location = new Point(197, 280);
+            EmailBox.Location = new Point(69, 368);
             EmailBox.MaxLength = 32767;
             EmailBox.MouseState = MaterialSkin.MouseState.OUT;
             EmailBox.Name = "EmailBox";
@@ -173,7 +178,7 @@ namespace MasiID
             PinBox.HideSelection = true;
             PinBox.Hint = "Enter PIN code";
             PinBox.LeadingIcon = null;
-            PinBox.Location = new Point(197, 334);
+            PinBox.Location = new Point(69, 422);
             PinBox.MaxLength = 32767;
             PinBox.MouseState = MaterialSkin.MouseState.OUT;
             PinBox.Name = "PinBox";
@@ -203,7 +208,7 @@ namespace MasiID
             SexBox.HideSelection = true;
             SexBox.Hint = "Sexe";
             SexBox.LeadingIcon = null;
-            SexBox.Location = new Point(197, 226);
+            SexBox.Location = new Point(295, 134);
             SexBox.MaxLength = 32767;
             SexBox.MouseState = MaterialSkin.MouseState.OUT;
             SexBox.Name = "SexBox";
@@ -232,7 +237,7 @@ namespace MasiID
             CardNbrBox.HideSelection = true;
             CardNbrBox.Hint = "Card number";
             CardNbrBox.LeadingIcon = null;
-            CardNbrBox.Location = new Point(197, 118);
+            CardNbrBox.Location = new Point(69, 134);
             CardNbrBox.MaxLength = 32767;
             CardNbrBox.MouseState = MaterialSkin.MouseState.OUT;
             CardNbrBox.Name = "CardNbrBox";
@@ -261,7 +266,7 @@ namespace MasiID
             SurnameBox.HideSelection = true;
             SurnameBox.Hint = "Surname";
             SurnameBox.LeadingIcon = null;
-            SurnameBox.Location = new Point(403, 172);
+            SurnameBox.Location = new Point(295, 188);
             SurnameBox.MaxLength = 32767;
             SurnameBox.MouseState = MaterialSkin.MouseState.OUT;
             SurnameBox.Name = "SurnameBox";
@@ -286,16 +291,17 @@ namespace MasiID
             SendDataButton.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             SendDataButton.Density = MaterialButton.MaterialButtonDensity.Default;
             SendDataButton.Depth = 0;
+            SendDataButton.Enabled = false;
             SendDataButton.HighEmphasis = true;
             SendDataButton.Icon = null;
-            SendDataButton.Location = new Point(332, 487);
+            SendDataButton.Location = new Point(295, 544);
             SendDataButton.Margin = new Padding(4, 5, 4, 5);
             SendDataButton.MouseState = MaterialSkin.MouseState.HOVER;
             SendDataButton.Name = "SendDataButton";
             SendDataButton.NoAccentTextColor = Color.Empty;
             SendDataButton.Size = new Size(135, 35);
             SendDataButton.TabIndex = 11;
-            SendDataButton.Text = "Send";
+            SendDataButton.Text = "Send (WIP)";
             SendDataButton.Type = MaterialButton.MaterialButtonType.Contained;
             SendDataButton.UseAccentColor = false;
             SendDataButton.UseVisualStyleBackColor = false;
@@ -311,7 +317,7 @@ namespace MasiID
             PinConfirmBox.HideSelection = true;
             PinConfirmBox.Hint = "Confirm PIN";
             PinConfirmBox.LeadingIcon = null;
-            PinConfirmBox.Location = new Point(403, 334);
+            PinConfirmBox.Location = new Point(295, 422);
             PinConfirmBox.MaxLength = 32767;
             PinConfirmBox.MouseState = MaterialSkin.MouseState.OUT;
             PinConfirmBox.Name = "PinConfirmBox";
@@ -331,13 +337,113 @@ namespace MasiID
             PinConfirmBox.UseSystemPasswordChar = true;
             PinConfirmBox.KeyPress += textBox1_KeyPress;
             // 
+            // MunicipalityBox
+            // 
+            MunicipalityBox.AnimateReadOnly = false;
+            MunicipalityBox.BackgroundImageLayout = ImageLayout.None;
+            MunicipalityBox.CharacterCasing = CharacterCasing.Normal;
+            MunicipalityBox.Depth = 0;
+            MunicipalityBox.Font = new Font("Microsoft Sans Serif", 16F, FontStyle.Regular, GraphicsUnit.Pixel);
+            MunicipalityBox.HideSelection = true;
+            MunicipalityBox.Hint = "Municipality";
+            MunicipalityBox.LeadingIcon = null;
+            MunicipalityBox.Location = new Point(69, 296);
+            MunicipalityBox.MaxLength = 32767;
+            MunicipalityBox.MouseState = MaterialSkin.MouseState.OUT;
+            MunicipalityBox.Name = "MunicipalityBox";
+            MunicipalityBox.PasswordChar = '\0';
+            MunicipalityBox.PrefixSuffixText = null;
+            MunicipalityBox.ReadOnly = true;
+            MunicipalityBox.RightToLeft = RightToLeft.No;
+            MunicipalityBox.SelectedText = "";
+            MunicipalityBox.SelectionLength = 0;
+            MunicipalityBox.SelectionStart = 0;
+            MunicipalityBox.ShortcutsEnabled = true;
+            MunicipalityBox.Size = new Size(200, 48);
+            MunicipalityBox.TabIndex = 19;
+            MunicipalityBox.TabStop = false;
+            MunicipalityBox.TextAlign = HorizontalAlignment.Left;
+            MunicipalityBox.TrailingIcon = null;
+            MunicipalityBox.UseSystemPasswordChar = false;
+            // 
+            // StreetAndNumberBox
+            // 
+            StreetAndNumberBox.AnimateReadOnly = false;
+            StreetAndNumberBox.BackgroundImageLayout = ImageLayout.None;
+            StreetAndNumberBox.CharacterCasing = CharacterCasing.Normal;
+            StreetAndNumberBox.Depth = 0;
+            StreetAndNumberBox.Font = new Font("Microsoft Sans Serif", 16F, FontStyle.Regular, GraphicsUnit.Pixel);
+            StreetAndNumberBox.HideSelection = true;
+            StreetAndNumberBox.Hint = "Street and number";
+            StreetAndNumberBox.LeadingIcon = null;
+            StreetAndNumberBox.Location = new Point(69, 242);
+            StreetAndNumberBox.MaxLength = 32767;
+            StreetAndNumberBox.MouseState = MaterialSkin.MouseState.OUT;
+            StreetAndNumberBox.Name = "StreetAndNumberBox";
+            StreetAndNumberBox.PasswordChar = '\0';
+            StreetAndNumberBox.PrefixSuffixText = null;
+            StreetAndNumberBox.ReadOnly = true;
+            StreetAndNumberBox.RightToLeft = RightToLeft.No;
+            StreetAndNumberBox.SelectedText = "";
+            StreetAndNumberBox.SelectionLength = 0;
+            StreetAndNumberBox.SelectionStart = 0;
+            StreetAndNumberBox.ShortcutsEnabled = true;
+            StreetAndNumberBox.Size = new Size(200, 48);
+            StreetAndNumberBox.TabIndex = 20;
+            StreetAndNumberBox.TabStop = false;
+            StreetAndNumberBox.TextAlign = HorizontalAlignment.Left;
+            StreetAndNumberBox.TrailingIcon = null;
+            StreetAndNumberBox.UseSystemPasswordChar = false;
+            // 
+            // ZipBox
+            // 
+            ZipBox.AnimateReadOnly = false;
+            ZipBox.BackgroundImageLayout = ImageLayout.None;
+            ZipBox.CharacterCasing = CharacterCasing.Normal;
+            ZipBox.Depth = 0;
+            ZipBox.Font = new Font("Microsoft Sans Serif", 16F, FontStyle.Regular, GraphicsUnit.Pixel);
+            ZipBox.HideSelection = true;
+            ZipBox.Hint = "Zip";
+            ZipBox.LeadingIcon = null;
+            ZipBox.Location = new Point(295, 242);
+            ZipBox.MaxLength = 32767;
+            ZipBox.MouseState = MaterialSkin.MouseState.OUT;
+            ZipBox.Name = "ZipBox";
+            ZipBox.PasswordChar = '\0';
+            ZipBox.PrefixSuffixText = null;
+            ZipBox.ReadOnly = true;
+            ZipBox.RightToLeft = RightToLeft.No;
+            ZipBox.SelectedText = "";
+            ZipBox.SelectionLength = 0;
+            ZipBox.SelectionStart = 0;
+            ZipBox.ShortcutsEnabled = true;
+            ZipBox.Size = new Size(200, 48);
+            ZipBox.TabIndex = 21;
+            ZipBox.TabStop = false;
+            ZipBox.TextAlign = HorizontalAlignment.Left;
+            ZipBox.TrailingIcon = null;
+            ZipBox.UseSystemPasswordChar = false;
+            // 
+            // pictureBox
+            // 
+            pictureBox.InitialImage = null;
+            pictureBox.Location = new Point(556, 136);
+            pictureBox.Name = "pictureBox";
+            pictureBox.Size = new Size(172, 208);
+            pictureBox.TabIndex = 22;
+            pictureBox.TabStop = false;
+            // 
             // Main
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(245, 245, 245);
             BackgroundImageLayout = ImageLayout.Center;
-            ClientSize = new Size(800, 600);
+            ClientSize = new Size(796, 631);
+            Controls.Add(pictureBox);
+            Controls.Add(ZipBox);
+            Controls.Add(StreetAndNumberBox);
+            Controls.Add(MunicipalityBox);
             Controls.Add(SurnameBox);
             Controls.Add(CardNbrBox);
             Controls.Add(SexBox);
@@ -345,17 +451,18 @@ namespace MasiID
             Controls.Add(EmailBox);
             Controls.Add(ErrorLabel);
             Controls.Add(NameBox);
-            Controls.Add(birthBox);
+            Controls.Add(BirthDateBox);
             Controls.Add(GetDataFromCardButton);
             Controls.Add(PinConfirmBox);
             Controls.Add(SendDataButton);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             MaximizeBox = false;
             Name = "Main";
-            Padding = new Padding(3, 56, 3, 3);
+            Padding = new Padding(0);
             Sizable = false;
             Text = "Amazi ID";
             TransparencyKey = Color.FromArgb(255, 192, 255);
+            ((System.ComponentModel.ISupportInitialize)pictureBox).EndInit();
             ResumeLayout(false);
         }
 
@@ -363,7 +470,7 @@ namespace MasiID
 
         private MaterialButton GetDataFromCardButton;
         private MaterialButton SendDataButton;
-        private MaterialTextBox2 birthBox;
+        private MaterialTextBox2 BirthDateBox;
         private MaterialTextBox2 NameBox;
         private MaterialTextBox2 EmailBox;
 
@@ -374,5 +481,11 @@ namespace MasiID
         private MaterialTextBox2 SurnameBox;
 
         private MaterialLabel ErrorLabel;
+
+        private MaterialTextBox2 MunicipalityBox;
+        private MaterialTextBox2 StreetAndNumberBox;
+        private MaterialTextBox2 ZipBox;
+
+        private PictureBox pictureBox;
     }
 }
