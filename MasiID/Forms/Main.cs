@@ -16,11 +16,20 @@ using MaterialSkin;
 using Egelke.Eid.Client.Model;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using System.Net;
+using MasiID.Forms;
+using System.Security.Cryptography;
+using PCSC.Iso7816;
+using SmartCardService;
 
 namespace MasiID
 {
     public partial class Main : MaterialForm
     {
+
+        private X509Certificate2 auth;
+        private X509Certificate2 sign;
+        private SmartCard smartCard;
+
         public Main()
         {
             InitializeComponent();
@@ -29,10 +38,12 @@ namespace MasiID
             materialSkinManager.AddFormToManage(this);
             materialSkinManager.Theme = MaterialSkin.MaterialSkinManager.Themes.LIGHT;
             materialSkinManager.ColorScheme = new ColorScheme(Primary.Red700, Primary.Red800,
-        Primary.Red500, Accent.Blue200, TextShade.WHITE);
-        }
+            Primary.Red500, Accent.Blue200, TextShade.WHITE);
 
-        private async void get_Data_From_Card(object sender, EventArgs e)
+            smartCard = new SmartCard();
+         }
+
+        private async void ReadDataFromCard(object sender, EventArgs e)
         {
             ErrorLabel.Text = "Lecture de la carte en cours...";
 
@@ -67,7 +78,8 @@ namespace MasiID
                         {
                             eid.Open();
 
-                            X509Certificate2 auth = eid.AuthCert;
+                            auth = eid.AuthCert;
+                            sign = eid.SignCert;
 
                             Identity identity = eid.Identity;
                             Address address = eid.Address;
@@ -116,32 +128,84 @@ namespace MasiID
 
         private async void Send_Click(object sender, EventArgs e)
         {
-            User user = new()
+            using (var pinDialog = new PinDialog())
             {
-                Sexe = SexBox.Text,
-                BirthDate = BirthDateBox.Text,
-                NumCard = CardNbrBox.Text,
-                PinCode = PinBox.Text,
-                PinCodeConfirm = PinConfirmBox.Text,
-                Email = EmailBox.Text,
-                Name = NameBox.Text,
-                Surname = SurnameBox.Text,
+                if (pinDialog.ShowDialog() != DialogResult.OK)
+                    return;
 
-                StreetAndNumber = StreetAndNumberBox.Text,
-                Municipality = MunicipalityBox.Text,
-                Zip = ZipBox.Text
-            };
+                string pin = pinDialog.Pin;
 
-            string error = user.IsValidUser();
-            if (!string.IsNullOrEmpty(error))
-            {
-                ErrorLabel.Text = error;
-                return;
+                User user = new()
+                {
+                    Sexe = SexBox.Text,
+                    BirthDate = BirthDateBox.Text,
+                    NumCard = CardNbrBox.Text,
+                    PinCode = PinBox.Text,
+                    PinCodeConfirm = PinConfirmBox.Text,
+                    Email = EmailBox.Text,
+                    Name = NameBox.Text,
+                    Surname = SurnameBox.Text,
+
+                    StreetAndNumber = StreetAndNumberBox.Text,
+                    Municipality = MunicipalityBox.Text,
+                    Zip = ZipBox.Text
+                };
+
+                string error = user.IsValidUser();
+                if (!string.IsNullOrEmpty(error))
+                {
+                    ErrorLabel.Text = error;
+                    return;
+                }
+
+                try
+                {
+                    string userData = JsonSerializer.Serialize(user);
+                    string hashedUserData = HashUtility.ComputeSha256Hash(userData);
+
+                    smartCard.Connect();
+
+                    bool status = smartCard.MseSet();
+                    if (!status)
+                    {
+                        ErrorLabel.Text = $"Erreur lors de la signature.";
+                        smartCard.LogOff();
+                        return;
+                    }
+
+
+                    status = smartCard.VerifyPin(pin);
+                    if (!status)
+                    {
+                        ErrorLabel.Text = $"Pin invalide.";
+                        smartCard.LogOff();
+                        return;
+                    }
+
+                    status = smartCard.SignData(hashedUserData);
+                    if (!status)
+                    {
+                        ErrorLabel.Text = $"Erreur lors de la signature.";
+                        smartCard.LogOff();
+                        return;
+                    }
+
+                    byte[] signature = smartCard.GetResponse();
+                    smartCard.LogOff();
+
+                    // === Send to API ===
+                    await Network.SendDataToApiAsync(userData, signature, sign);
+
+                    ErrorLabel.Text = "";
+                }
+                catch (Exception ex)
+                {
+                    ErrorLabel.Text = $"Erreur lors de la signature.";
+                }
             }
-            await Task.Run(() => Network.SendDataToApiAsync(user));
-            await Network.SendDataToApiAsync(user);
+
         }
-        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        private void CheckDigits(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
             {

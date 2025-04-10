@@ -68,7 +68,7 @@ namespace MasiID
             GetDataFromCardButton.Text = "Read Card";
             GetDataFromCardButton.Type = MaterialButton.MaterialButtonType.Contained;
             GetDataFromCardButton.UseAccentColor = false;
-            GetDataFromCardButton.Click += get_Data_From_Card;
+            GetDataFromCardButton.Click += ReadDataFromCard;
             // 
             // BirthDateBox
             // 
@@ -196,7 +196,7 @@ namespace MasiID
             PinBox.TextAlign = HorizontalAlignment.Left;
             PinBox.TrailingIcon = null;
             PinBox.UseSystemPasswordChar = true;
-            PinBox.KeyPress += textBox1_KeyPress;
+            PinBox.KeyPress += CheckDigits;
             // 
             // SexBox
             // 
@@ -291,7 +291,7 @@ namespace MasiID
             SendDataButton.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             SendDataButton.Density = MaterialButton.MaterialButtonDensity.Default;
             SendDataButton.Depth = 0;
-            SendDataButton.Enabled = false;
+            SendDataButton.Enabled = true;
             SendDataButton.HighEmphasis = true;
             SendDataButton.Icon = null;
             SendDataButton.Location = new Point(295, 544);
@@ -301,7 +301,7 @@ namespace MasiID
             SendDataButton.NoAccentTextColor = Color.Empty;
             SendDataButton.Size = new Size(135, 35);
             SendDataButton.TabIndex = 11;
-            SendDataButton.Text = "Send (WIP)";
+            SendDataButton.Text = "Send";
             SendDataButton.Type = MaterialButton.MaterialButtonType.Contained;
             SendDataButton.UseAccentColor = false;
             SendDataButton.UseVisualStyleBackColor = false;
@@ -335,7 +335,7 @@ namespace MasiID
             PinConfirmBox.TextAlign = HorizontalAlignment.Left;
             PinConfirmBox.TrailingIcon = null;
             PinConfirmBox.UseSystemPasswordChar = true;
-            PinConfirmBox.KeyPress += textBox1_KeyPress;
+            PinConfirmBox.KeyPress += CheckDigits;
             // 
             // MunicipalityBox
             // 
