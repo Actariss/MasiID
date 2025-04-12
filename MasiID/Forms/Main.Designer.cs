@@ -58,7 +58,7 @@ namespace MasiID
             GetDataFromCardButton.Depth = 0;
             GetDataFromCardButton.HighEmphasis = true;
             GetDataFromCardButton.Icon = null;
-            GetDataFromCardButton.Location = new Point(134, 544);
+            GetDataFromCardButton.Location = new Point(132, 544);
             GetDataFromCardButton.Margin = new Padding(4, 5, 4, 5);
             GetDataFromCardButton.MouseState = MaterialSkin.MouseState.HOVER;
             GetDataFromCardButton.Name = "GetDataFromCardButton";
@@ -80,7 +80,7 @@ namespace MasiID
             BirthDateBox.HideSelection = true;
             BirthDateBox.Hint = "Birth Date";
             BirthDateBox.LeadingIcon = null;
-            BirthDateBox.Location = new Point(295, 296);
+            BirthDateBox.Location = new Point(293, 296);
             BirthDateBox.MaxLength = 32767;
             BirthDateBox.MouseState = MaterialSkin.MouseState.OUT;
             BirthDateBox.Name = "BirthDateBox";
@@ -93,7 +93,7 @@ namespace MasiID
             BirthDateBox.SelectionStart = 0;
             BirthDateBox.ShortcutsEnabled = true;
             BirthDateBox.Size = new Size(200, 48);
-            BirthDateBox.TabIndex = 3;
+            BirthDateBox.TabIndex = 8;
             BirthDateBox.TabStop = false;
             BirthDateBox.TextAlign = HorizontalAlignment.Left;
             BirthDateBox.TrailingIcon = null;
@@ -109,7 +109,7 @@ namespace MasiID
             NameBox.HideSelection = true;
             NameBox.Hint = "Name";
             NameBox.LeadingIcon = null;
-            NameBox.Location = new Point(69, 188);
+            NameBox.Location = new Point(67, 188);
             NameBox.MaxLength = 32767;
             NameBox.MouseState = MaterialSkin.MouseState.OUT;
             NameBox.Name = "NameBox";
@@ -122,7 +122,7 @@ namespace MasiID
             NameBox.SelectionStart = 0;
             NameBox.ShortcutsEnabled = true;
             NameBox.Size = new Size(200, 48);
-            NameBox.TabIndex = 5;
+            NameBox.TabIndex = 3;
             NameBox.TabStop = false;
             NameBox.TextAlign = HorizontalAlignment.Left;
             NameBox.TrailingIcon = null;
@@ -132,7 +132,7 @@ namespace MasiID
             // 
             ErrorLabel.Depth = 0;
             ErrorLabel.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            ErrorLabel.Location = new Point(69, 484);
+            ErrorLabel.Location = new Point(67, 484);
             ErrorLabel.MouseState = MaterialSkin.MouseState.HOVER;
             ErrorLabel.Name = "ErrorLabel";
             ErrorLabel.Size = new Size(426, 37);
@@ -149,7 +149,7 @@ namespace MasiID
             EmailBox.HideSelection = true;
             EmailBox.Hint = "Enter email";
             EmailBox.LeadingIcon = null;
-            EmailBox.Location = new Point(69, 368);
+            EmailBox.Location = new Point(67, 368);
             EmailBox.MaxLength = 32767;
             EmailBox.MouseState = MaterialSkin.MouseState.OUT;
             EmailBox.Name = "EmailBox";
@@ -162,7 +162,7 @@ namespace MasiID
             EmailBox.SelectionStart = 0;
             EmailBox.ShortcutsEnabled = true;
             EmailBox.Size = new Size(200, 48);
-            EmailBox.TabIndex = 7;
+            EmailBox.TabIndex = 9;
             EmailBox.TabStop = false;
             EmailBox.TextAlign = HorizontalAlignment.Left;
             EmailBox.TrailingIcon = null;
@@ -176,9 +176,9 @@ namespace MasiID
             PinBox.Depth = 0;
             PinBox.Font = new Font("Microsoft Sans Serif", 16F, FontStyle.Regular, GraphicsUnit.Pixel);
             PinBox.HideSelection = true;
-            PinBox.Hint = "Enter PIN code";
+            PinBox.Hint = "Enter new account PIN";
             PinBox.LeadingIcon = null;
-            PinBox.Location = new Point(69, 422);
+            PinBox.Location = new Point(67, 422);
             PinBox.MaxLength = 32767;
             PinBox.MouseState = MaterialSkin.MouseState.OUT;
             PinBox.Name = "PinBox";
@@ -191,7 +191,7 @@ namespace MasiID
             PinBox.SelectionStart = 0;
             PinBox.ShortcutsEnabled = true;
             PinBox.Size = new Size(200, 48);
-            PinBox.TabIndex = 8;
+            PinBox.TabIndex = 10;
             PinBox.TabStop = false;
             PinBox.TextAlign = HorizontalAlignment.Left;
             PinBox.TrailingIcon = null;
@@ -208,7 +208,7 @@ namespace MasiID
             SexBox.HideSelection = true;
             SexBox.Hint = "Sexe";
             SexBox.LeadingIcon = null;
-            SexBox.Location = new Point(295, 134);
+            SexBox.Location = new Point(293, 134);
             SexBox.MaxLength = 32767;
             SexBox.MouseState = MaterialSkin.MouseState.OUT;
             SexBox.Name = "SexBox";
@@ -221,7 +221,7 @@ namespace MasiID
             SexBox.SelectionStart = 0;
             SexBox.ShortcutsEnabled = true;
             SexBox.Size = new Size(200, 48);
-            SexBox.TabIndex = 15;
+            SexBox.TabIndex = 2;
             SexBox.TabStop = false;
             SexBox.TextAlign = HorizontalAlignment.Left;
             SexBox.TrailingIcon = null;
@@ -237,7 +237,7 @@ namespace MasiID
             CardNbrBox.HideSelection = true;
             CardNbrBox.Hint = "Card number";
             CardNbrBox.LeadingIcon = null;
-            CardNbrBox.Location = new Point(69, 134);
+            CardNbrBox.Location = new Point(67, 134);
             CardNbrBox.MaxLength = 32767;
             CardNbrBox.MouseState = MaterialSkin.MouseState.OUT;
             CardNbrBox.Name = "CardNbrBox";
@@ -250,7 +250,7 @@ namespace MasiID
             CardNbrBox.SelectionStart = 0;
             CardNbrBox.ShortcutsEnabled = true;
             CardNbrBox.Size = new Size(200, 48);
-            CardNbrBox.TabIndex = 16;
+            CardNbrBox.TabIndex = 1;
             CardNbrBox.TabStop = false;
             CardNbrBox.TextAlign = HorizontalAlignment.Left;
             CardNbrBox.TrailingIcon = null;
@@ -266,7 +266,7 @@ namespace MasiID
             SurnameBox.HideSelection = true;
             SurnameBox.Hint = "Surname";
             SurnameBox.LeadingIcon = null;
-            SurnameBox.Location = new Point(295, 188);
+            SurnameBox.Location = new Point(293, 188);
             SurnameBox.MaxLength = 32767;
             SurnameBox.MouseState = MaterialSkin.MouseState.OUT;
             SurnameBox.Name = "SurnameBox";
@@ -279,7 +279,7 @@ namespace MasiID
             SurnameBox.SelectionStart = 0;
             SurnameBox.ShortcutsEnabled = true;
             SurnameBox.Size = new Size(200, 48);
-            SurnameBox.TabIndex = 18;
+            SurnameBox.TabIndex = 4;
             SurnameBox.TabStop = false;
             SurnameBox.TextAlign = HorizontalAlignment.Left;
             SurnameBox.TrailingIcon = null;
@@ -291,10 +291,9 @@ namespace MasiID
             SendDataButton.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             SendDataButton.Density = MaterialButton.MaterialButtonDensity.Default;
             SendDataButton.Depth = 0;
-            SendDataButton.Enabled = true;
             SendDataButton.HighEmphasis = true;
             SendDataButton.Icon = null;
-            SendDataButton.Location = new Point(295, 544);
+            SendDataButton.Location = new Point(293, 544);
             SendDataButton.Margin = new Padding(4, 5, 4, 5);
             SendDataButton.MouseState = MaterialSkin.MouseState.HOVER;
             SendDataButton.Name = "SendDataButton";
@@ -315,9 +314,9 @@ namespace MasiID
             PinConfirmBox.Depth = 0;
             PinConfirmBox.Font = new Font("Microsoft Sans Serif", 16F, FontStyle.Regular, GraphicsUnit.Pixel);
             PinConfirmBox.HideSelection = true;
-            PinConfirmBox.Hint = "Confirm PIN";
+            PinConfirmBox.Hint = "Confirm account PIN";
             PinConfirmBox.LeadingIcon = null;
-            PinConfirmBox.Location = new Point(295, 422);
+            PinConfirmBox.Location = new Point(293, 422);
             PinConfirmBox.MaxLength = 32767;
             PinConfirmBox.MouseState = MaterialSkin.MouseState.OUT;
             PinConfirmBox.Name = "PinConfirmBox";
@@ -330,7 +329,7 @@ namespace MasiID
             PinConfirmBox.SelectionStart = 0;
             PinConfirmBox.ShortcutsEnabled = true;
             PinConfirmBox.Size = new Size(200, 48);
-            PinConfirmBox.TabIndex = 12;
+            PinConfirmBox.TabIndex = 11;
             PinConfirmBox.TabStop = false;
             PinConfirmBox.TextAlign = HorizontalAlignment.Left;
             PinConfirmBox.TrailingIcon = null;
@@ -347,7 +346,7 @@ namespace MasiID
             MunicipalityBox.HideSelection = true;
             MunicipalityBox.Hint = "Municipality";
             MunicipalityBox.LeadingIcon = null;
-            MunicipalityBox.Location = new Point(69, 296);
+            MunicipalityBox.Location = new Point(67, 296);
             MunicipalityBox.MaxLength = 32767;
             MunicipalityBox.MouseState = MaterialSkin.MouseState.OUT;
             MunicipalityBox.Name = "MunicipalityBox";
@@ -360,7 +359,7 @@ namespace MasiID
             MunicipalityBox.SelectionStart = 0;
             MunicipalityBox.ShortcutsEnabled = true;
             MunicipalityBox.Size = new Size(200, 48);
-            MunicipalityBox.TabIndex = 19;
+            MunicipalityBox.TabIndex = 7;
             MunicipalityBox.TabStop = false;
             MunicipalityBox.TextAlign = HorizontalAlignment.Left;
             MunicipalityBox.TrailingIcon = null;
@@ -376,7 +375,7 @@ namespace MasiID
             StreetAndNumberBox.HideSelection = true;
             StreetAndNumberBox.Hint = "Street and number";
             StreetAndNumberBox.LeadingIcon = null;
-            StreetAndNumberBox.Location = new Point(69, 242);
+            StreetAndNumberBox.Location = new Point(67, 242);
             StreetAndNumberBox.MaxLength = 32767;
             StreetAndNumberBox.MouseState = MaterialSkin.MouseState.OUT;
             StreetAndNumberBox.Name = "StreetAndNumberBox";
@@ -389,7 +388,7 @@ namespace MasiID
             StreetAndNumberBox.SelectionStart = 0;
             StreetAndNumberBox.ShortcutsEnabled = true;
             StreetAndNumberBox.Size = new Size(200, 48);
-            StreetAndNumberBox.TabIndex = 20;
+            StreetAndNumberBox.TabIndex = 5;
             StreetAndNumberBox.TabStop = false;
             StreetAndNumberBox.TextAlign = HorizontalAlignment.Left;
             StreetAndNumberBox.TrailingIcon = null;
@@ -405,7 +404,7 @@ namespace MasiID
             ZipBox.HideSelection = true;
             ZipBox.Hint = "Zip";
             ZipBox.LeadingIcon = null;
-            ZipBox.Location = new Point(295, 242);
+            ZipBox.Location = new Point(293, 242);
             ZipBox.MaxLength = 32767;
             ZipBox.MouseState = MaterialSkin.MouseState.OUT;
             ZipBox.Name = "ZipBox";
@@ -418,7 +417,7 @@ namespace MasiID
             ZipBox.SelectionStart = 0;
             ZipBox.ShortcutsEnabled = true;
             ZipBox.Size = new Size(200, 48);
-            ZipBox.TabIndex = 21;
+            ZipBox.TabIndex = 6;
             ZipBox.TabStop = false;
             ZipBox.TextAlign = HorizontalAlignment.Left;
             ZipBox.TrailingIcon = null;
@@ -427,7 +426,7 @@ namespace MasiID
             // pictureBox
             // 
             pictureBox.InitialImage = null;
-            pictureBox.Location = new Point(556, 136);
+            pictureBox.Location = new Point(554, 136);
             pictureBox.Name = "pictureBox";
             pictureBox.Size = new Size(172, 208);
             pictureBox.TabIndex = 22;
@@ -439,7 +438,7 @@ namespace MasiID
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(245, 245, 245);
             BackgroundImageLayout = ImageLayout.Center;
-            ClientSize = new Size(796, 631);
+            ClientSize = new Size(792, 621);
             Controls.Add(pictureBox);
             Controls.Add(ZipBox);
             Controls.Add(StreetAndNumberBox);

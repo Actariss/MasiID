@@ -12,37 +12,27 @@ namespace MasiID.Domains
     public class Network
     {
 
-        private const string API_URL_REGISTER = "http://192.168.3.143:5000/register";
+        private const string API_URL_REGISTER = "http://127.0.0.1:8080/register";
 
-        public static async Task SendDataToApiAsync(string userData, byte[] signature, X509Certificate2 cert)
+        public static async Task<bool> SendDataToApiAsync(byte[] userData, byte[] signature, X509Certificate2 cert)
         {
             var client = new HttpClient();
 
-            var content = new StringContent(userData, Encoding.UTF8, "application/json");
+            var requestMessage = new HttpRequestMessage(HttpMethod.Post, API_URL_REGISTER);
 
-            var requestMessage = new HttpRequestMessage(HttpMethod.Post, API_URL_REGISTER)
-            {
-                Content = content
-            };
-
+            requestMessage.Headers.Add("X-Data", Convert.ToBase64String(userData));
             requestMessage.Headers.Add("X-Signature", Convert.ToBase64String(signature));
-            requestMessage.Headers.Add("X-Certificate", Convert.ToBase64String(cert.GetPublicKey()));
+            requestMessage.Headers.Add("X-Certificate", Convert.ToBase64String(cert.Export(X509ContentType.Cert)));
+           
 
             try
             {
                 var response = await client.SendAsync(requestMessage);
-                if (response.IsSuccessStatusCode)
-                {
-                    MessageBox.Show("Data sent successfully");
-                }
-                else
-                {
-                    MessageBox.Show($"Error during sending: {response.StatusCode}");
-                }
+                return response.IsSuccessStatusCode;
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Exception: {ex.Message}");
+                return false;
             }
         }
     }

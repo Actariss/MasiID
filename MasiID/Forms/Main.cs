@@ -45,7 +45,7 @@ namespace MasiID
 
         private async void ReadDataFromCard(object sender, EventArgs e)
         {
-            ErrorLabel.Text = "Lecture de la carte en cours...";
+            ErrorLabel.Text = CustomMessage.START_READING_CARD;
 
             await Task.Run(() =>
             {
@@ -59,7 +59,7 @@ namespace MasiID
                         {
                             this.Invoke((System.Windows.Forms.MethodInvoker)(() =>
                             {
-                                ErrorLabel.Text = "Aucune carte eID détectée.";
+                                ErrorLabel.Text = CustomMessage.END_READING_CARD_FAILURE;
                                 BirthDateBox.Text = string.Empty;
                                 NameBox.Text = string.Empty;
                                 SurnameBox.Text = string.Empty;
@@ -97,29 +97,33 @@ namespace MasiID
                                 MunicipalityBox.Text = address.Municipality;
                                 ZipBox.Text = address.Zip;
                                 pictureBox.Image = PictureHelper.GetImage(picture);
-                                ErrorLabel.Text = "";
                             }));
                         }
+
+                        this.Invoke((System.Windows.Forms.MethodInvoker)(() =>
+                        {
+                            ErrorLabel.Text = CustomMessage.END_READING_CARD_SUCCESS;
+                        }));
                     }
                     catch (NoCardException)
                     {
                         this.Invoke((System.Windows.Forms.MethodInvoker)(() =>
                         {
-                            ErrorLabel.Text = "No card detected in the reader";
+                            ErrorLabel.Text = CustomMessage.END_READING_CARD_FAILURE;
                         }));
                     }
                     catch (ReaderException)
                     {
                         this.Invoke((System.Windows.Forms.MethodInvoker)(() =>
                         {
-                            ErrorLabel.Text = "The reader is not detected";
+                            ErrorLabel.Text = CustomMessage.END_READING_CARD_FAILURE;
                         }));
                     }
                     catch (Exception ex)
                     {
                         this.Invoke((System.Windows.Forms.MethodInvoker)(() =>
                         {
-                            ErrorLabel.Text = $"Erreur : {ex.Message}";
+                            ErrorLabel.Text = CustomMessage.GENERIC_ERROR;
                         }));
                     }
                 }
@@ -135,21 +139,20 @@ namespace MasiID
 
                 string pin = pinDialog.Pin;
 
-                User user = new()
-                {
-                    Sexe = SexBox.Text,
-                    BirthDate = BirthDateBox.Text,
-                    NumCard = CardNbrBox.Text,
-                    PinCode = PinBox.Text,
-                    PinCodeConfirm = PinConfirmBox.Text,
-                    Email = EmailBox.Text,
-                    Name = NameBox.Text,
-                    Surname = SurnameBox.Text,
+                User user = new(
+                    SexBox.Text,
+                    BirthDateBox.Text,
+                    CardNbrBox.Text,
+                    PinBox.Text,
+                    PinConfirmBox.Text,
+                    EmailBox.Text,
+                    NameBox.Text,
+                    SurnameBox.Text,
+                    MunicipalityBox.Text,
+                    ZipBox.Text,
+                    StreetAndNumberBox.Text
+                );
 
-                    StreetAndNumber = StreetAndNumberBox.Text,
-                    Municipality = MunicipalityBox.Text,
-                    Zip = ZipBox.Text
-                };
 
                 string error = user.IsValidUser();
                 if (!string.IsNullOrEmpty(error))
@@ -160,7 +163,7 @@ namespace MasiID
 
                 try
                 {
-                    string userData = JsonSerializer.Serialize(user);
+                    string userData = JsonSerializer.Serialize(user.ToDictionary());
                     string hashedUserData = HashUtility.ComputeSha256Hash(userData);
 
                     smartCard.Connect();
@@ -168,7 +171,7 @@ namespace MasiID
                     bool status = smartCard.MseSet();
                     if (!status)
                     {
-                        ErrorLabel.Text = $"Erreur lors de la signature.";
+                        ErrorLabel.Text = CustomMessage.GENERIC_ERROR;
                         smartCard.LogOff();
                         return;
                     }
@@ -177,7 +180,7 @@ namespace MasiID
                     status = smartCard.VerifyPin(pin);
                     if (!status)
                     {
-                        ErrorLabel.Text = $"Pin invalide.";
+                        ErrorLabel.Text = CustomMessage.WRONG_PIN_ERROR;
                         smartCard.LogOff();
                         return;
                     }
@@ -185,7 +188,7 @@ namespace MasiID
                     status = smartCard.SignData(hashedUserData);
                     if (!status)
                     {
-                        ErrorLabel.Text = $"Erreur lors de la signature.";
+                        ErrorLabel.Text = CustomMessage.SIGNING_ERROR;
                         smartCard.LogOff();
                         return;
                     }
@@ -194,13 +197,16 @@ namespace MasiID
                     smartCard.LogOff();
 
                     // === Send to API ===
-                    await Network.SendDataToApiAsync(userData, signature, sign);
-
-                    ErrorLabel.Text = "";
+                    ErrorLabel.Text = CustomMessage.START_ACCOUNT_CREATION;
+                    bool result = await Network.SendDataToApiAsync(Encoding.ASCII.GetBytes(userData), signature, sign);
+                    if (result)
+                        ErrorLabel.Text = CustomMessage.END_ACCOUNT_CREATION_SUCCESS;
+                    else
+                        ErrorLabel.Text = CustomMessage.END_ACCOUNT_CREATION_FAILURE;
                 }
                 catch (Exception ex)
                 {
-                    ErrorLabel.Text = $"Erreur lors de la signature.";
+                    ErrorLabel.Text = CustomMessage.GENERIC_ERROR;
                 }
             }
 

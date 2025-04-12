@@ -45,11 +45,12 @@ namespace MasiID.Forms
             PinBox.BackgroundImageLayout = ImageLayout.None;
             PinBox.CharacterCasing = CharacterCasing.Normal;
             PinBox.Depth = 0;
-            PinBox.Font = new Font("Roboto", 16F, FontStyle.Regular, GraphicsUnit.Pixel);
+            PinBox.Font = new Font("Microsoft Sans Serif", 16F, FontStyle.Regular, GraphicsUnit.Pixel);
             PinBox.HideSelection = true;
-            PinBox.Hint = "Entrez votre code PIN";
+            PinBox.Hint = "PIN code";
             PinBox.LeadingIcon = null;
-            PinBox.Location = new Point(30, 80);
+            PinBox.Location = new Point(29, 81);
+            PinBox.Margin = new Padding(2, 2, 2, 2);
             PinBox.MaxLength = 4;
             PinBox.MouseState = MaterialSkin.MouseState.OUT;
             PinBox.Name = "PinBox";
@@ -61,7 +62,7 @@ namespace MasiID.Forms
             PinBox.SelectionLength = 0;
             PinBox.SelectionStart = 0;
             PinBox.ShortcutsEnabled = true;
-            PinBox.Size = new Size(200, 48);
+            PinBox.Size = new Size(208, 48);
             PinBox.TabIndex = 0;
             PinBox.TabStop = false;
             PinBox.TextAlign = HorizontalAlignment.Left;
@@ -70,17 +71,18 @@ namespace MasiID.Forms
             // 
             // okButton
             // 
+            okButton.AutoSize = false;
             okButton.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             okButton.Density = MaterialButton.MaterialButtonDensity.Default;
             okButton.Depth = 0;
             okButton.HighEmphasis = true;
             okButton.Icon = null;
-            okButton.Location = new Point(30, 150);
-            okButton.Margin = new Padding(4, 6, 4, 6);
+            okButton.Location = new Point(29, 145);
+            okButton.Margin = new Padding(2, 3, 2, 3);
             okButton.MouseState = MaterialSkin.MouseState.HOVER;
             okButton.Name = "okButton";
             okButton.NoAccentTextColor = Color.Empty;
-            okButton.Size = new Size(64, 36);
+            okButton.Size = new Size(90, 36);
             okButton.TabIndex = 1;
             okButton.Text = "OK";
             okButton.Type = MaterialButton.MaterialButtonType.Contained;
@@ -89,17 +91,18 @@ namespace MasiID.Forms
             // 
             // cancelButton
             // 
+            cancelButton.AutoSize = false;
             cancelButton.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             cancelButton.Density = MaterialButton.MaterialButtonDensity.Default;
             cancelButton.Depth = 0;
             cancelButton.HighEmphasis = true;
             cancelButton.Icon = null;
-            cancelButton.Location = new Point(140, 150);
-            cancelButton.Margin = new Padding(4, 6, 4, 6);
+            cancelButton.Location = new Point(147, 145);
+            cancelButton.Margin = new Padding(2, 3, 2, 3);
             cancelButton.MouseState = MaterialSkin.MouseState.HOVER;
             cancelButton.Name = "cancelButton";
             cancelButton.NoAccentTextColor = Color.Empty;
-            cancelButton.Size = new Size(87, 36);
+            cancelButton.Size = new Size(90, 36);
             cancelButton.TabIndex = 2;
             cancelButton.Text = "Annuler";
             cancelButton.Type = MaterialButton.MaterialButtonType.Contained;
@@ -108,16 +111,17 @@ namespace MasiID.Forms
             // 
             // PinDialog
             // 
-            AutoScaleDimensions = new SizeF(12F, 30F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(280, 250);
+            ClientSize = new Size(267, 203);
             Controls.Add(PinBox);
             Controls.Add(okButton);
             Controls.Add(cancelButton);
+            Margin = new Padding(2, 2, 2, 2);
             Name = "PinDialog";
-            Text = "Entrez votre code PIN";
+            Padding = new Padding(2, 32, 2, 2);
+            Text = "Enter Card PIN";
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
