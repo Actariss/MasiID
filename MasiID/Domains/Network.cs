@@ -9,7 +9,7 @@ namespace MasiID.Domains
 {
     public class Network
     {
-        private const string API_URL_REGISTER = "https://192.168.8.55:30444/AMAZI/V1/mazi-id/registerTest";
+        private const string API_URL_REGISTER = "https://192.168.8.55:30444/AMAZI/v1/mazi-id/register";
 
         public static async Task<bool> SendDataToApiAsync(byte[] userData, byte[] signature, X509Certificate2 cert)
         {

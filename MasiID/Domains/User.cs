@@ -145,7 +145,6 @@ namespace MasiID.Domains
                 { "birthDate", this.GetBirthDate() },
                 { "numCard", this.GetNumCard() },
                 { "pinCode", this.GetPinCode() },
-                { "pinCodeConfirm", this.GetPinCodeConfirm() },
                 { "email", this.GetEmail() },
                 { "name", this.GetName() },
                 { "surname", this.GetSurname() },
